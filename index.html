@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>50 DAYS</title>
+
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            font-family: sans-serif;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            gap: 2rem;
+        }
+
+        h1 {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>50 Days Challenge</h1>
+    <h2 id="days">Day 1</h2>
+    <h2 id="percentage">Percentage: 2%</h2>
+
+    <script>
+        let currentDay = localStorage.getItem('currentDay') || 1;
+        let currentPercentage = localStorage.getItem('currentPercentage') || 2;
+
+        function updateTracker() {
+            document.querySelector('#days').innerText = `Day ${currentDay}`;
+            document.querySelector('#percentage').innerText = `Percentage: ${currentPercentage}%`;
+        }
+
+        function incrementDay() {
+            if (currentDay <= 50) {
+                currentDay++;
+                currentPercentage += 2;
+                updateTracker();
+            } else {
+                document.querySelector('#percentage').innerText = 'Congratulations Hugo, You have done it !! :)';
+                clearInterval(interval);
+            }
+        }
+
+        const interval = setInterval(incrementDay, 86400000);
+
+        // Save current state to localStorage
+        function saveToLocalStorage() {
+            localStorage.setItem('currentDay', currentDay);
+            localStorage.setItem('currentPercentage', currentPercentage);
+        }
+
+        // Save current state every second
+        setInterval(saveToLocalStorage, 1000);
+    </script>
+</body>
+
+</html>
